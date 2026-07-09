@@ -14,10 +14,19 @@ from app.config import settings
 async def lifespan(app: FastAPI):
     # from app.ml.model_loader import load_model
     # app.state.model = load_model(settings.MODEL_PATH)
-    print("✅  SignAI backend started")
+    
+    # Test DB connection on startup
+    from app.database import engine
+    from sqlalchemy import text
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        print("✅ Database connected")
+    except Exception as e:
+        print(f"⚠️  Database not connected: {e}")
+    print("✅ SignAI backend started")
     yield
-    print("👋  SignAI backend shutting down")
-
+    print("👋 SignAI backend shutting down")
 
 # ── App factory ────────────────────────────────────────────────────────────────
 app = FastAPI(
@@ -37,6 +46,8 @@ app.add_middleware(
 )
 
 # ── Routers ───────────────────────────────────────────────
+from app.routers import auth
+app.include_router(auth.router)
 
 # ── Health check ───────────────────────────────────────────────────────────────
 @app.get("/health", tags=["system"])
