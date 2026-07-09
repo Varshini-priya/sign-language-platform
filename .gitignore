@@ -1,0 +1,53 @@
+# ── Python ──────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+*.coverage
+htmlcov/
+
+# ── Environment ─────────────────────────────────────────────────
+.env
+.env.local
+.env.production
+*.env
+
+# ── ML Models (large files — use Git LFS or store externally) ───
+ml_training/saved_models/*.h5
+ml_training/saved_models/*.pt
+ml_training/saved_models/*.pb
+ml_training/logs/
+
+# ── Dataset (never commit raw data) ─────────────────────────────
+dataset/raw/
+dataset/landmarks/
+dataset/train/
+dataset/val/
+dataset/test/
+
+# ── Node / Frontend ─────────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/.env.local
+.npm
+
+# ── IDE ─────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Docker ──────────────────────────────────────────────────────
+*.log
+docker-compose.override.yml
